@@ -15,6 +15,11 @@
         <li class="nav-item">
             <router-link class="nav-link" to="/signin">LOGGA IN</router-link>
           </li>
+          
+          <li class="nav-item">
+            <div class="nav-link modal-trigger" data-target="modal-signup">SKAPA KONTO</div>
+          </li>
+
       
       </ul>
     </div>
