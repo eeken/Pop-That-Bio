@@ -23,6 +23,7 @@
           </li>
           
         </ul>
+        
       </div>
     </nav>
 
@@ -32,6 +33,17 @@
         <h4 class="white-text text-grey lighten-5">Skapa konto</h4>
         <br />
         <form id="signup-form">
+
+        <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="" id="first_name" type="text" class="validate">
+          <label for="first_name"><p class="white-text text-grey lighten-5">Förnamen</p></label>
+        </div>
+        <div class="input-field col s6">
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name"><p class="white-text text-grey lighten-5">Efternamn</p></label>
+        </div>
+      </div>
           <div class="input-field">
             <input type="email" id="signup-email" required />
             <label for="signup-email"><p class="white-text text-grey lighten-5">Epost adress</p></label>
@@ -40,7 +52,9 @@
             <input type="password" id="signup-password" required />
             <label for="signup-password "><p class="white-text text-grey lighten-5">Välj lösenord</p></label>
           </div>
-         
+         <div>
+          <button class="btn yellow darken-2 z-depth-0">fortsättning</button> <button class="nav-link modal-trigger btn yellow darken-2 z-depth-0" data-target="modal-signup" >avboka</button>
+         </div>
         </form>
       </div>
     </div>
@@ -153,7 +167,7 @@ nav {
 }
 
 .sidenav,.modal {
-  background-color: rgba(107, 22, 72, 0.788);
+  background-color: rgb(107, 22, 72);
 }
 .modal {
  background: linear-gradient(to top, rgb(117, 9, 67), rgb(219, 166, 195));}
