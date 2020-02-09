@@ -13,7 +13,7 @@
             <a class="dropdown-trigger btn pink darken-4 " href="#" data-target="dropdown1">{{ selectedGenre }}</a>
 
             <!-- Dropdown Structure -->
-            <ul id="dropdown1" class="dropdown-content ">
+            <ul id="dropdown1" class="dropdown-content pink darken-4 ">
               <li>
                 <a @click="sortMovieList(genres.drama)" href="#!"><p class="white-text text-grey lighten-5">Drama</p></a>
               </li>
@@ -223,10 +223,19 @@ export default {
   background: #181616;
   
 }
+.row-movies-list {
+    margin: 3% 0;
+    border-radius: 4px;
+    -webkit-box-shadow: 2px 2px 4px rgba(185, 82, 82, 0.1);
+    box-shadow: 2px 2px 4px rgb(232, 129, 164);
+}
 .film-header {
   display: flex;
   justify-content: space-between;
   margin: 2% 0;
+}
+.dropdown-trigger{
+background: #ca166a
 }
 
 .film-header h4 {
@@ -240,6 +249,9 @@ export default {
   justify-content: space-between;
   float: right;
 }
+.dropdown-content {
+  background: #ca166a
+}
 
 .sorting-option h5 {
   align-items: flex-end;
@@ -247,10 +259,10 @@ export default {
   margin: 0 3%;
 }
 
-.movies-list {
+.row-movies-list {
   margin: 3% 0;
   border-radius: 4px;
-  box-shadow: 2px 2px 4px rgba(226, 223, 223, 0.1);
+  box-shadow: 2px 2px 4px rgba(245, 248, 241, 0.1);
   /*display: flex;
   justify-content: space-evenly;
   border: 1px solid black;

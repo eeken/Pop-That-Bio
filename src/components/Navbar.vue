@@ -128,7 +128,18 @@
 </template>
 <script>
 import M from 'materialize-css'
+import firebase from "firebase";
+
 export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+      email1: '',
+      password1: '',
+      isLoggedIn: false
+    }
+  },
   mounted() {
     var elems = document.querySelectorAll(".carousel");
     this.$M.Carousel.init(elems);
@@ -139,6 +150,59 @@ export default {
 
     var items = document.querySelectorAll(".collapsible");
     M.Collapsible.init(items);
+  },
+  methods: {
+      signUp(e) {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then(
+          user => {
+            window.console.log(`Account created for ${user.email}`)
+            this.$router.push("/mypage");
+            const modal = document.querySelector('#modal-signup')
+            M.Modal.getInstance(modal).close()
+            this.email = ''
+            this.password = ''
+          },
+          err => {
+            alert(err.message);
+          }
+        );
+
+      e.preventDefault();
+    },
+    logIn(e){
+      e.preventDefault();
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        this.$router.push("/mypage");
+        window.console.log('u are logged in')
+        this.isLoggedIn = true
+        const modal = document.querySelector('#modal-login')
+            M.Modal.getInstance(modal).close()
+            this.email = ''
+            this.password = ''
+      
+    },
+    logOut(e){
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+            window.console.log('u logged out')
+            this.$router.push("/");
+            this.isLoggedIn = false
+          },
+          err => {
+            alert(err.message);
+          }
+        );
+
+      e.preventDefault();
+    }
+    
   }
 };
 </script>
