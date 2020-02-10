@@ -2,10 +2,20 @@
   <div class="container-fluid navbar navbar-fixed">
     <nav class="nav-extended">
       <div class="nav-wrapper">
+        <form @submit.prevent="search">
+        <div class="input-field">
+          <input v-model="searchInput" class="autocomplete" id="search" type="search" required>
+          <label for="search"></label>
+          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+        <a href="#!" class="our-brand-logo" @click="goToStart">POP THAT BIO</a>
+        
         <router-link to="/">
-          <a class="brand-logo">
-            <p>POP THAT BIO</p>
-          </a>
+          <div class="brand-logo">
+            
+          </div>
         </router-link>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger">
           <i class="fas fa-align-justify"></i>
@@ -19,42 +29,33 @@
             <router-link to="/about" class="nav-link">OM OSS</router-link>
           </li>
           <li class="nav-item">
-            <div class="nav-link modal-trigger" data-target="modal-login">LOGGA IN</div>
+            <div class="nav-link modal-trigger account-button" data-target="modal-login">LOGGA IN</div>
           </li>
-          
+          <li class="nav-item">
+            <div class="nav-link modal-trigger account-button" data-target="modal-signup">SKAPA KONTO</div>
+          </li>
+          <li class="logged-in">
+            <div class="nav-link" id="logout account-button" @click="logOut">LOGGA UT</div>
+          </li>
         </ul>
-        
       </div>
     </nav>
 
     <!-- SIGN UP MODAL -->
     <div id="modal-signup" class="modal">
       <div class="modal-content">
-        <h4 class="white-text text-grey lighten-5">Skapa konto</h4>
+        <h4>Skapa konto</h4>
         <br />
         <form id="signup-form">
-
-        <div class="row">
-        <div class="input-field col s6">
-          <input placeholder="" id="first_name" type="text" class="validate">
-          <label for="first_name"><p class="white-text text-grey lighten-5">Förnamen</p></label>
-        </div>
-        <div class="input-field col s6">
-          <input id="last_name" type="text" class="validate">
-          <label for="last_name"><p class="white-text text-grey lighten-5">Efternamn</p></label>
-        </div>
-      </div>
           <div class="input-field">
-            <input type="email" id="signup-email" required />
-            <label for="signup-email"><p class="white-text text-grey lighten-5">Epost adress</p></label>
+            <input v-model="email"  type="email" id="signup-email" required />
+            <label for="signup-email">E-post adress</label>
           </div>
           <div class="input-field">
-            <input type="password" id="signup-password" required />
-            <label for="signup-password "><p class="white-text text-grey lighten-5">Välj lösenord</p></label>
+            <input v-model="password" type="password" id="signup-password" required />
+            <label for="signup-password">Välj lösenord</label>
           </div>
-         <div>
-          <button class="btn yellow darken-2 z-depth-0">fortsättning</button> <button class="nav-link modal-trigger btn yellow darken-2 z-depth-0" data-target="modal-signup" >avboka</button>
-         </div>
+          <button class="btn darken-2 z-depth-0" @click="signUp">Skapa konto</button>
         </form>
       </div>
     </div>
@@ -62,21 +63,18 @@
     <!-- LOGIN MODAL -->
     <div id="modal-login" class="modal">
       <div class="modal-content">
-        <h4 class="white-text text-grey lighten-5">Logga in</h4>
+        <h4>Logga in</h4>
         <br />
         <form id="login-form">
           <div class="input-field">
-            <input type="email" id="login-email" required />
-            <label for="login-email"><p class="white-text text-grey lighten-5">Epost adress</p></label>
+            <input v-model="email" type="email" id="login-email" required />
+            <label for="login-email">E-post adress</label>
           </div>
           <div class="input-field">
-            <input type="password" id="login-password" required />
-            <label for="login-password "><p class="white-text text-grey lighten-5">Välj lösenord</p></label>
+            <input v-model="password" type="password" id="login-password" required />
+            <label for="login-password">Ditt lösenord</label>
           </div>
-          <div>
-          <button class="btn yellow darken-2 z-depth-0">Logga in</button> <button class="nav-link modal-trigger btn yellow darken-2 z-depth-0" data-target="modal-signup" >Skapa konto</button>
-        </div>
-      
+          <button class="btn darken-2 z-depth-0" @click.prevent="logIn">Logga in</button>
         </form>
       </div>
     </div>
@@ -105,27 +103,30 @@
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/about" class="nav-link">
+        <router-link to="/medlemmar" class="nav-link">
           <p class="white-text text-grey lighten-5">Medlemmar</p>
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/about" class="nav-link">
+        <router-link to="/q-and-a" class="nav-link">
           <p class="white-text text-grey lighten-5">Frågor och svar</p>
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link class="nav-link" to="/signin">
+        <router-link class="nav-link" to="/kundservice">
           <p class="white-text text-grey lighten-5">Kundservice</p>
         </router-link>
       </li>
       <li class="nav-item">
-          <a>  <div class="nav-link modal-trigger" data-target="modal-login"> 
-              <p class="white-text text-grey lighten-5">LOGGA IN</p></div></a>
-          </li>
+        <router-link class="nav-link" to="/signin">
+          <p class="white-text text-grey lighten-5">LOGGA IN</p>
+        </router-link>
+      </li>
     </ul>
   </div>
 </template>
+
+
 <script>
  export default {
   data() {
@@ -318,8 +319,8 @@ export default {
       
     },
   
-      signUp(e) {
-      aut
+     async signUp(e) {
+       aut
         .createUserWithEmailAndPassword(this.email, this.password)
         .then(
           user => {
@@ -337,10 +338,13 @@ export default {
 
       e.preventDefault();
     },
-    logIn(e){
+    async logIn(e){
       e.preventDefault();
-      aut
-        .signInWithEmailAndPassword(this.email, this.password)
+      await aut
+        .signInWithEmailAndPassword(this.email, this.password).catch(err => {
+          window.console.log(err)
+          return
+        })
         this.$router.push("/mypage");
         window.console.log('u are logged in')
         this.isLoggedIn = true
@@ -349,7 +353,7 @@ export default {
             this.email = ''
             this.password = ''
     },
-    logOut(e){
+    async logOut(e){
       aut
         .signOut()
         .then(() => {
@@ -363,6 +367,9 @@ export default {
         );
 
       e.preventDefault();
+    },
+    goToStart(){
+      this.$router.push("/");
     }
     
   }
@@ -390,18 +397,21 @@ nav {
     rgba(197, 49, 99, 0.5)
   );
   text-shadow: 2px 4px 1px rgb(12, 1, 1);
-  font-family: borntogrille;
 }
 
-.sidenav,.modal {
-  background-color: rgb(107, 22, 72);
+
+
+.account-button {
+  padding: 0 10px;
+}
+
+.sidenav {
+  background-color: rgba(107, 22, 72, 0.788);
 }
 .modal {
  background: linear-gradient(to top, rgb(117, 9, 67), rgb(219, 166, 195));}
 
 .our-brand-logo {
-  font-size: 2.5rem;
-  padding-left: 1.5%;
   font-family: borntogrille;
   text-shadow: 1px 6px 1px rgb(12, 1, 1);
 }

@@ -8,8 +8,12 @@ import Signin from '@/components/Signin'
 import BookTicket from '@/components/BookTicket'
 import SeatsPlan from '@/components/SeatsPlan'
 import Reservation from '@/components/Reservation'
+import ConfirmReserve from '@/components/ConfirmReserve'
 import MyPage from '@/components/MyPage'
 import Register from '@/components/Register'
+import Members from '@/components/Members'
+import Questions from '@/components/Questions'
+import CustomerService from '@/components/CustomerService'
 
 Vue.use(VueRouter)
 
@@ -50,6 +54,11 @@ const routes = [
     component: Reservation
   },
   {
+    path: '/movies/:slug/ticket/seatsplan/reservation/confirm',
+    name: 'confirmreserve',
+    component: ConfirmReserve
+  },
+  {
     path: '/signin',
     name: 'signin',
     component: Signin
@@ -68,6 +77,21 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register
+  },
+  {
+    path: '/medlemmar',
+    name: 'Members',
+    component: Members
+  },
+  {
+    path: '/q-and-a',
+    name: 'Questions',
+    component: Questions
+  },
+  {
+    path: '/kundservice',
+    name: 'CustomerService',
+    component: CustomerService
   }
 ]
 
