@@ -220,7 +220,7 @@ export default {
 
 <style lang="css">
 .vv{
-  background: #181616;
+  background: #412435;
   
 }
 .row-movies-list {
