@@ -53,7 +53,7 @@
       </div>
     </div>
 
-    <hr />
+     <hr class="hr-style" />
 
     <transition name="movie-trailer" v-if="showTrailer" class="modal " id="modal-trailer">
       <div class="movie-trailer-container ">
