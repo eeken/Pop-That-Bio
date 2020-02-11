@@ -26,19 +26,20 @@
           <li class="nav-item">
             <router-link to="/about" class="nav-link">OM OSS</router-link>
           </li>
-         <!-- <div v-if="!isLoggedIn"> -->
-            <li class="nav-item">
-              <div class="nav-link modal-trigger account-button" data-target="modal-login">LOGGA IN</div>
-            </li>
-            <li class="nav-item">
-              <div class="nav-link modal-trigger account-button" data-target="modal-signup">SKAPA KONTO</div>
-            </li>
-          <!-- </div>
-          <div v-else> -->
-            <li class="nav-item">
-              <div class="nav-link" id="logout account-button" @click="logOut">LOGGA UT</div>
-            </li>
-          <!-- </div> -->
+          <li class="nav-item" v-if="isLoggedIn==false">
+            <div class="nav-link modal-trigger account-button" data-target="modal-login">LOGGA IN</div>
+          </li>
+          <li class="nav-item" v-if="isLoggedIn==false">
+            <div class="nav-link modal-trigger account-button" data-target="modal-signup">SKAPA KONTO</div>
+          </li>
+          <li class="logged-in" v-if="isLoggedIn">
+            <div class="nav-link" id="logout account-button" @click="logOut">LOGGA UT</div>
+          </li>
+          <li class="nav-item" v-if="isLoggedIn">
+          <router-link to="/mypage">
+        <i class="large material-icons white-text text-grey lighten-5">account_circle</i>
+      </router-link>
+      </li>
         </ul>
         
       </div>
@@ -51,7 +52,11 @@
         <br />
         <form id="signup-form">
           <div class="input-field">
-            <input v-model="email" type="email" id="signup-email" required />
+            <input v-model="name"  type="text" id="signup-name" required />
+            <label for="signup-name">Namn</label>
+          </div>
+          <div class="input-field">
+            <input v-model="email"  type="email" id="signup-email" required />
             <label for="signup-email">E-post adress</label>
           </div>
           <div class="input-field">
@@ -85,12 +90,14 @@
     <ul class="sidenav" id="mobile-demo">
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
       <router-link to="/mypage">
-        <i class="large material-icons white-text text-grey lighten-5">account_circle</i>
+        <i class="large material-icons white-text text-grey lighten-5" v-if="isLoggedIn">account_circle</i>
+        <p class=" white-text text-grey lighten-5" v-if="isLoggedIn">{{this.email}}</p>
       </router-link>
       <li class="nav-item">
         <router-link to="/">
           <a class="brand-logo">
-            <p class="white-text text-grey lighten-5">HEM</p>
+            <p class="white-text text-grey lighten-5 " >HEM</p>
+            
           </a>
         </router-link>
       </li>
@@ -120,11 +127,20 @@
           <p class="white-text text-grey lighten-5">Kundservice</p>
         </router-link>
       </li>
-      <li class="nav-item">
-        <router-link class="nav-link" to="/signin">
-          <p class="white-text text-grey lighten-5">LOGGA IN</p>
-        </router-link>
-      </li>
+     
+          <li class="nav-item" v-if="isLoggedIn==false">
+            <a class="nav-link modal-trigger account-button white-text text-grey lighten-5" data-target="modal-signup">SKAPA KONTO</a>
+          </li>
+           <li class="nav-item" v-if="isLoggedIn==false">
+              <router-link class="nav-link" to="/mypage">
+            <div class="nav-link modal-trigger account-button white-text text-grey lighten-5" data-target="modal-login">LOGGA IN</div>
+             </router-link>
+          </li>
+          <li class="" v-if="isLoggedIn">
+            <router-link class="nav-link" to="/">
+            <div class="nav-link white-text text-grey lighten-5" id="logout account-button" @click="logOut">LOGGA UT</div>
+             </router-link>
+          </li>
     </ul>
   </div>
 </template> 
@@ -137,8 +153,7 @@ export default {
       searchInput: '',
       email: '',
       password: '',
-      email1: '',
-      password1: '',
+      name: '',
       isLoggedIn: false
     }
   },
@@ -219,13 +234,31 @@ export default {
         this.$router.push("/");
       }
     },
+    icon(){
+
+  this.$(document).ready(function(){
+    this.$('.sidenav').sidenav();
+  });
+    },
   
+     
+    storeAccountDetails() {
+      let accountInfo = {
+        name: this.name,
+        email: this.email,
+        collection: "accounts"
+      };
+
+      this.$store.dispatch("sendToFirebase", accountInfo);
+    },
      async signUp(e) {
-       aut
+      aut
+        .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
         .then(
           user => {
-            window.console.log(`Account created for ${user.email}`);
+            window.console.log(`Account created for ${user.email}`)
+            this.storeAccountDetails();
             this.$router.push("/mypage");
             const modal = document.querySelector("#modal-signup");
             this.$M.Modal.getInstance(modal).close();
@@ -297,24 +330,27 @@ nav {
     rgb(117, 9, 67),
     rgba(197, 49, 99, 0.5)
   );
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  text-shadow: 2px 4px 1px rgb(12, 1, 1);
+  font-family: borntogrille;
 }
 
-
-
-.account-button {
-  padding: 0 10px;
-}
-
-.sidenav {
-  background-color: rgba(107, 22, 72, 0.788);
+.sidenav,.modal {
+  background-color: rgb(107, 22, 72);
 }
 .modal {
- background: linear-gradient(to top, rgb(117, 9, 67), rgb(219, 166, 195));}
+ background: linear-gradient(to top, rgb(117, 9, 67), rgb(219, 166, 195));
+ }
+ @media (min-width: 760px) {
+   .modal {
+ width: 30%;}
 
-.brand-logo {
+ }
+
+.our-brand-logo {
+  font-size: 2.5rem;
+  padding-left: 1.5%;
   font-family: borntogrille;
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  text-shadow: 1px 6px 1px rgb(12, 1, 1);
 }
 
 .our-brand-logo:hover {
