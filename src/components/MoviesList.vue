@@ -1,49 +1,50 @@
 <template>
+<div class="vv">
   <div class="container">
     <div class="row film-header">
       <div class="col s4">
-        <h4>Filmer</h4>
+        <h4 class="white-text text-grey lighten-5">Filmer</h4>
       </div>
 
       <div class="col s8">
         <div class="sorting-option">
           <div>
             <!-- Dropdown Trigger -->
-            <a class="dropdown-trigger btn" href="#" data-target="dropdown1">{{ selectedGenre }}</a>
+            <a class="dropdown-trigger btn pink darken-4 " href="#" data-target="dropdown1">{{ selectedGenre }}</a>
 
             <!-- Dropdown Structure -->
-            <ul id="dropdown1" class="dropdown-content">
+            <ul id="dropdown1" class="dropdown-content pink darken-4 ">
               <li>
-                <a @click="sortMovieList(genres.drama)" href="#!">Drama</a>
+                <a @click="sortMovieList(genres.drama)" href="#!"><p class="white-text text-grey lighten-5">Drama</p></a>
               </li>
               <li>
-                <a @click="sortMovieList(genres.action)" href="#!">Action</a>
+                <a @click="sortMovieList(genres.action)" href="#!"><p class="white-text text-grey lighten-5">Action</p></a>
               </li>
               <li>
-                <a @click="sortMovieList(genres.thriller)" href="#!">Thriller</a>
+                <a @click="sortMovieList(genres.thriller)" href="#!"><p class="white-text text-grey lighten-5">Thriller</p></a>
               </li>
               <li>
-                <a @click="sortMovieList(genres.family)" href="#!">Familj</a>
+                <a @click="sortMovieList(genres.family)" href="#!"><p class="white-text text-grey lighten-5">Familj</p></a>
               </li>
               <li>
-                <a @click="sortMovieList(genres.comedy)" href="#!">Komedi</a>
+                <a @click="sortMovieList(genres.comedy)" href="#!"><p class="white-text text-grey lighten-5">Komedi</p></a>
               </li>
               <li>
-                <a @click="sortMovieList(genres.all)" href="#!">Visa alla</a>
+                <a @click="sortMovieList(genres.all)" href="#!"><p class="white-text text-grey lighten-5">Visa alla</p></a>
               </li>
             </ul>
           </div>
 
           <h5>
             <router-link to="/movies/">
-              <button class="btn">
+              <button class="btn pink darken-4">
                 <i class="fas fa-list"></i>
               </button>
             </router-link>
           </h5>
           <h5>
             <router-link to="/movieslistpic/">
-              <button class="btn">
+              <button class="btn pink darken-4">
                 <i class="far fa-file-image"></i>
               </button>
             </router-link>
@@ -52,14 +53,14 @@
       </div>
     </div>
 
-    <hr />
+     <hr class="hr-style" />
 
-    <transition name="movie-trailer" v-if="showTrailer" class="modal" id="modal-trailer">
-      <div class="movie-trailer-container">
+    <transition name="movie-trailer" v-if="showTrailer" class="modal " id="modal-trailer">
+      <div class="movie-trailer-container ">
         <div class="movie-trailer-wrapper">
-          <div class="movie-trailer-body">
+          <div class="movie-trailer-body ">
             <slot name="footer">
-              <i class="far fa-times-circle cross-button" @click="showTrailer = false"></i>
+              <i class="far fa-times-circle cross-button " @click="showTrailer = false"></i>
             </slot>
             <iframe
               width="700"
@@ -77,7 +78,7 @@
     <div v-for="(movie, index) in movies" :key="index">
       <!-- <div v-for="(movie, index) in moviesData" :key="index"> -->
 
-      <router-link :to="'/movies/' + movie.slug">
+      <router-link :to="'/movies/' + movie.slug ">
         <div class="row movies-list">
           <div class="col s12 m3 l3">
             <div class="movie-image">
@@ -92,15 +93,15 @@
               </div>
               <div class="date">
                 <!-- <p>{{momentTime(movie.showTime.toMillis())}}</p> -->
-                <p>{{movie.genre}} | {{movie.length}} minuter | {{movie.age_limit}} år</p>
+                <p class="white-text text-grey lighten-5">{{movie.genre}} | {{movie.length}} minuter | {{movie.age_limit}} år</p>
               </div>
             </div>
           </div>
 
           <div class="col s12 m3 l3">
-            <div class="movie-text">
-              <h6>Om filmen:</h6>
-              <p>{{movie.about | subString}}</p>
+            <div class="movie-text ">
+              <h6 class="white-text text-grey lighten-5">Om filmen:</h6>
+              <p class="white-text text-grey lighten-5">{{movie.about | subString}}</p>
             </div>
           </div>
 
@@ -108,7 +109,7 @@
             <div class="trailer">
               <h6>
                 <button
-                  class="btn modal-trigger"
+                  class="btn modal-trigger pink darken-3"
                   data-target="modal-trailer"
                   @click.stop="dispMovieTrailer($event, movie.movieTrailer)"
                 >
@@ -119,8 +120,10 @@
           </div>
         </div>
       </router-link>
+       <hr />
     </div>
   </div>
+ </div>
 </template>
 
 <script>
@@ -216,10 +219,23 @@ export default {
 </script>
 
 <style lang="css">
+.vv{
+  background: #412435;
+  
+}
+.row-movies-list {
+    margin: 3% 0;
+    border-radius: 4px;
+    -webkit-box-shadow: 2px 2px 4px rgba(185, 82, 82, 0.1);
+    box-shadow: 2px 2px 4px rgb(232, 129, 164);
+}
 .film-header {
   display: flex;
   justify-content: space-between;
   margin: 2% 0;
+}
+.dropdown-trigger{
+background: #ca166a
 }
 
 .film-header h4 {
@@ -233,6 +249,9 @@ export default {
   justify-content: space-between;
   float: right;
 }
+.dropdown-content {
+  background: #ca166a
+}
 
 .sorting-option h5 {
   align-items: flex-end;
@@ -240,10 +259,10 @@ export default {
   margin: 0 3%;
 }
 
-.movies-list {
+.row-movies-list {
   margin: 3% 0;
   border-radius: 4px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px 4px rgba(245, 248, 241, 0.1);
   /*display: flex;
   justify-content: space-evenly;
   border: 1px solid black;
@@ -251,7 +270,7 @@ export default {
 }
 
 .movies-list:hover {
-  background: rgba(255, 186, 240, 0.3);
+  background: rgba(247, 246, 248, 0.3);
 }
 
 .movies-list:nth-child(even) {
@@ -276,9 +295,6 @@ export default {
   text-align: justify;
 }
 
-.trailer {
-  z-index: +1;
-}
 
 .movie-trailer-container {
   position: fixed;
@@ -327,7 +343,7 @@ iframe {
 
 .cross-button:hover {
   cursor: pointer;
-  color: rgb(247, 158, 188);
+  color: rgb(243, 22, 96);
 }
 
 .movie-trailer-enter {
@@ -343,4 +359,6 @@ iframe {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
+
+
 </style>

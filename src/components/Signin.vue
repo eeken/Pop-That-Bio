@@ -31,34 +31,8 @@
          </div>
     </form> 
   </div>
-      <div class="row">
-        <div class="col s5 offset-s3 ">
-             <p class="white-text text-grey lighten-5">Medlemskapet för dig som älskar bio</p>
-               <div class="group3">
-                 <div class="row"> 
-                    <div class="col l4"><img src="../assets/images/aws.jpg" alt="" width="60%" class="circle responsive-img"></div>
-                    <div class="col l4"><img src="../assets/images/qaz.jpg" alt="" width="80%" class="circle responsive-img"></div>
-                    <div class="col l4"><img src="../assets/images/aaa.png" alt="" width="50%" class="circle responsive-img"></div>
-                 </div>
-             <div class="row">
-               <h5 class="col s4 white-text text-grey lighten-5 ">Förtur till biljettsläpp </h5>
-               <h5 class="col s4 white-text text-grey lighten-5"> Erbjudanden i kiosken</h5>
-               <h5 class="col s4 white-text text-grey lighten-5">Medlemskvällar</h5>
-             </div>
-             </div>
-           <div class="butt">
-             <router-link to="/tickets">
-                            <div class="card-panel  pink darken-1  text-align: center white-text text-darken-2">Bli medlem</div>
-                            <br>
-                            <span class=" white-text text-darken-2">Som inloggad medlem tjänar du automatiskt poäng då du köper biljetter i appen eller på POP-THAT-BIO.se och du har dessutom 
-                              alltid medlemskapet med dig i fickan. Bra va? Du måste vara 16 år för att bli medlem.</span>
-             </router-link>
-          </div>
-     </div>         
-  </div>
-  
-
-  </div>
+ 
+ 
 </template>
 
 <script>

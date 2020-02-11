@@ -309,6 +309,8 @@ nav {
 .sidenav {
   background-color: rgba(107, 22, 72, 0.788);
 }
+.modal {
+ background: linear-gradient(to top, rgb(117, 9, 67), rgb(219, 166, 195));}
 
 .brand-logo {
   font-family: borntogrille;
